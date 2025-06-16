@@ -1,41 +1,53 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Dashboard = () => {
-  const [message, setMessage] = useState('');
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState('');
-  const navigate = useNavigate();
+  const [greeting, setGreeting] = useState('')
+  const navigate = useNavigate()
 
   useEffect(() => {
-    axios
-      .get('http://localhost:3001/dashboard')
-      .then((res) => {
-        if (res.data.valid) {
-          setMessage(res.data.message);
-        } else {
-          navigate('/');
+    const token = localStorage.getItem('token')
+
+    if (!token){
+      toast.error('Unauthorized!...Please log in')
+      navigate('/login')
+    } else {
+      axios.get('http://localhost:5000/protected', {
+        headers: {
+          Authorization: `Bearer ${token}`
         }
       })
-      .catch((err) => {
-        console.error(err);
-        setError('Something went wrong. Redirecting to login...');
-        setTimeout(() => navigate('/'), 2000);
+      .then(res => {
+        setGreeting(res.data.message)   // ✅ Save "Welcom, name"
       })
-      .finally(() => {
-        setLoading(false);
-      });
-  }, [navigate]);
+      .catch(err => {
+        toast.err('Session expired. Please login again')
+        localStorage.removeItem('token')
+        navigate('/login')
+      })
+    }
+  }, [navigate])
 
-  if (loading) return <div className="p-4">Loading Dashboard...</div>;
-  if (error) return <div className="p-4 text-red-500">{error}</div>;
+  const handleLogout = () => {
+    localStorage.removeItem('token')
+    toast.success('Logged out!')
+    setTimeout(() => navigate('/login'), 1000)
+  }
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50">
+      <ToastContainer position='top-center' />
       <div className="text-2xl font-semibold text-gray-800">
-        Dashboard: {message}
+        {greeting || 'Loading...'}
       </div>
+      <button onClick={handleLogout}
+        className="mt-4 bg-red-600 text-white px-4 py-2 rounded
+       hover:bg-red-700 transition">
+        log out
+      </button>
     </div>
   );
 };

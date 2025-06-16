@@ -47,7 +47,8 @@ const Homepage = () => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.2, duration: 0.6 }}
       >
-        <h1 className='md:tracking-widest font-semibold font-mono text-4xl md:text-5xl text-ellipsis overflow-hidden'>
+        <h1 className=' font-semibold font-mono text-4xl md:text-5xl
+         text-ellipsis overflow-hidden lg:text-7xl'>
           We evolve marketing ecosystems <br />
           <p className='mt-3'>for consumer brands</p>
         </h1>

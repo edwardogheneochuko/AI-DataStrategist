@@ -1,0 +1,4 @@
+button span:last-child {
+    border-radius: 1rem; /* Match the button's rounded-2xl */
+  }
+  
