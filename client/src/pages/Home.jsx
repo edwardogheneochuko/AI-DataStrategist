@@ -1,10 +1,10 @@
-
+// feature
 
 import React from 'react'
-import Navbar from './components/common/Navbar'
-import homepage from './assets/homepage.jpg'
-import Homepage from './components/HomePage/Homepage'
-import Data from './components/HomePage/Data'
+import Navbar from '../components/common/Navbar'
+import homepage from '../assets/homepage.jpg'
+import Homepage from '../components/HomePage/Homepage'
+import Data from '../components/HomePage/Data'
 
 const Home = () => {
   return (

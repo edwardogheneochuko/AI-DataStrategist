@@ -1,114 +1,122 @@
-
 import React, { useState } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
-axios.defaults.withCredentials = true;
+// 🔐 Register page
 
 const Registration = () => {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
-  const [loading, setLoading] = useState(false);
+  const inputStyles = 'w-full px-4 py-2 shadow-md focus:outline-none focus:ring-2 focus:ring-gray-600';
+
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '', 
+    password: '',
+    confirmPassword: ''
+  });
 
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
 
-  const handleSubmit = (e) => {
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setError('');
 
-    if (!name || !email || !password) {
-      setError('All fields are required');
+    const { name, email, password, confirmPassword } = formData;
+
+    if (password !== confirmPassword) {
+      toast.error('Passwords do not match');
       return;
     }
 
     setLoading(true);
 
-    axios
-      .post('http://localhost:3001/register', { name, email, password })
-      .then(() => navigate('/login'))
-      .catch((err) => {
-        console.error(err);
-        setError('Something went wrong. Try again later.');
-      })
-      .finally(() => setLoading(false));
+    try {
+      const res = await axios.post('http://localhost:5000/register', {
+        name: name.trim(),
+        email: email.trim().toLowerCase(),
+        password: password.trim()
+      });
+
+      toast.success(res.data.message || 'Registration successful! Redirecting...');
+      setTimeout(() => {
+        navigate('/login');
+      }, 2000);
+    } catch (err) {
+      toast.error(err.response?.data?.message || 'Registration failed. Try again.');
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100 px-4">
+      <ToastContainer position="top-center" />
       <form
         onSubmit={handleSubmit}
         className="bg-white p-6 rounded-xl shadow-md w-full max-w-md space-y-5"
       >
-        <h2 className="text-2xl font-bold text-center text-gray-800">
-          Create an Account
-        </h2>
+        <h2 className="text-2xl font-bold text-center text-gray-800">Create an Account</h2>
 
-        {error && (
-          <div className="text-red-600 text-sm text-center">{error}</div>
-        )}
+        <input
+          name="name"
+          type="text"
+          placeholder="Name"
+          value={formData.name}
+          onChange={handleChange}
+          className={inputStyles}
+          required
+        />
 
-        <div>
-          <label htmlFor="name" className="block text-sm text-gray-700">
-            Name
-          </label>
-          <input
-            id="name"
-            type="text"
-            placeholder="Enter name"
-            className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-          />
-        </div>
+        <input
+          name="email"
+          type="email"
+          placeholder="Email"
+          value={formData.email}
+          onChange={handleChange}
+          className={inputStyles}
+          required
+        />
 
-        <div>
-          <label htmlFor="email" className="block text-sm text-gray-700">
-            Email
-          </label>
-          <input
-            id="email"
-            type="email"
-            placeholder="Enter email"
-            className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-        </div>
+        <input
+          name="password"
+          type="password"
+          placeholder="Password"
+          value={formData.password}
+          onChange={handleChange}
+          className={inputStyles}
+          required
+        />
 
-        <div>
-          <label htmlFor="password" className="block text-sm text-gray-700">
-            Password
-          </label>
-          <input
-            id="password"
-            type="password"
-            placeholder="Enter password"
-            className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </div>
+        <input
+          name="confirmPassword"
+          type="password"
+          placeholder="Confirm Password"
+          value={formData.confirmPassword}
+          onChange={handleChange}
+          className={inputStyles}
+          required
+        />
 
         <button
           type="submit"
           disabled={loading}
-          className="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition
-           duration-200 disabled:opacity-50"
-        >
+          className={`w-full bg-gray-700 text-white py-2 rounded-lg hover:bg-green-700
+             duration-200 cursor-pointer 
+             ${loading ? 'opacity-50 cursor-not-allowed' : ''}`}>
           {loading ? 'Registering...' : 'Register'}
         </button>
 
         <div className="text-center">
           <p className="text-sm text-gray-600">Already have an account?</p>
-          <button
-            type="button"
-            className="mt-1 text-blue-600 hover:underline"
-            onClick={() => navigate('/login')}
-          >
-            Login
-          </button>
+          <Link to='/login' className="mt-1 text-blue-600 hover:underline">
+            Log in
+          </Link>
         </div>
       </form>
     </div>

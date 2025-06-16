@@ -2,12 +2,14 @@ import { Menu, Rocket, XIcon } from 'lucide-react'
 import React, { useState } from 'react'
 import { Link } from 'react-scroll'
 import { motion, AnimatePresence } from 'framer-motion'
+import { useNavigate } from 'react-router-dom'
 
 const RespNav = () => {
   const styles =
     'shadow-md py-2 text-gray-600 cursor-pointer hover:text-2xl duration-300 hover:text-red-400'
 
   const [toggle, setToggle] = useState(false)
+  const navigate = useNavigate()
 
   const handleToggle = () => {
     setToggle(!toggle)
@@ -87,7 +89,7 @@ const RespNav = () => {
               <button
                 className='my-2 bg-gray-200 px-3 py-2 mx-auto text-lg rounded-md cursor-pointer 
           hover:bg-gray-50 hover:text-red-400 duration-200 text-gray-600 font-semibold'
-              >
+              onClick={() => navigate('/login')}>
                 Log in
               </button>
             </ul>
