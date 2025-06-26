@@ -4,24 +4,24 @@ import React from 'react'
 import Navbar from '../components/common/Navbar'
 import homepage from '../assets/homepage.jpg'
 import Homepage from '../components/HomePage/Homepage'
-import Data from '../components/HomePage/Data'
+import Platform from '../components/HomePage/Platform'
+
 
 const Home = () => {
   return (
-    <div>
-      <div style={{
-        backgroundImage: `url(${homepage})`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        height: '100vh', // Full viewport height
-        width: '100%',
-      }}>
-      <Navbar />
-      <Homepage />
-      <Data />
+    <div
+      className="w-full bg-cover bg-center"
+      style={{ backgroundImage: `url(${homepage})`, minHeight: '100vh' }}
+    >
+      <div className="pt-2 md:pt-3"> {/* ✅ Add top padding here */}
+        <Navbar />
+        <Homepage />
       </div>
+      <Platform />
+      
     </div>
   )
 }
+
 
 export default Home

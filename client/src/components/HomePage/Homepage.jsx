@@ -10,7 +10,6 @@ const Homepage = () => {
   const [addRates, setAddRates] = useState(0)
 
   
-
   useEffect(() => {
     const firstInterval = setInterval(() => {
       setPercentage(prev => {
@@ -35,8 +34,8 @@ const Homepage = () => {
   }, [])
 
   return (
-    <motion.div
-      className='mt-32 px-1'
+    <motion.div id='home'
+      className='mt-20 px-1'
       initial={{ opacity: 0, y: 50 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.8, ease: 'easeOut' }}
@@ -47,40 +46,47 @@ const Homepage = () => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.2, duration: 0.6 }}
       >
-        <h1 className=' font-semibold font-mono text-4xl md:text-5xl
-         text-ellipsis overflow-hidden lg:text-7xl'>
+        <h1 className=' font-semibold font-mono text-2xl md:text-3xl
+         text-ellipsis overflow-hidden lg:text-6xl text-neutral-900'>
           We evolve marketing ecosystems <br />
           <p className='mt-3'>for consumer brands</p>
         </h1>
-        <div className='text-gray-800 mx-auto space-y-5'>
-          <p>
-            Approach complex data goals with confidence. Seamlessly integrate your marketing, business,
-            and customer data with AI-powered workflows that grows with your business
-          </p>
-          <ColorBtn name="Book A Demo" />
-          <TransparentBtn name="Get Started Free" />
-        </div>
+        <div className='mx-10 sm:mx-auto  
+        sm:w-1/2 md:w-2/3 text-sm md:text-sm lg:text-lg space-y-5'>
+  <p className='text-gray-500 font-serif'>
+    Approach complex data goals with confidence. Seamlessly integrate your marketing, business,
+    and customer data with AI-powered workflows that grow with your business.
+  </p>
+</div>
+
+        <div className='flex flex-col sm:flex-row justify-center w-fit mx-auto space-x-0
+         sm:space-x-5 sm:space-y-0 space-y-4'>
+  <ColorBtn name="BookADemo" />
+  <TransparentBtn name="GetStartedFree" />
+</div>
+
       </motion.div>
 
       <motion.div
-        className='flex flex-col items-center md:flex-row md:justify-between'
+        className='flex justify-between mx-10 sm:mx-20 md:mx-32'
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.4, duration: 0.6 }}
       >
         {/* Guaranteed Block */}
         <motion.div
-          className='bg-gray-200 w-fit px-10 py-2 rounded-md shadow-md mt-10 md:ml-10'
+          className='bg-gray-200 w-fit px-5 
+           sm:px-10 py-2 rounded-md shadow-md mt-10 '
           initial={{ scale: 0.9, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           transition={{ delay: 0.6 }}
         >
-          <div className='flex justify-between text-gray-700'>
+          <div className='flex justify-between text-gray-700 text-xs sm:text-base'>
             <h1>Guaranteed</h1>
             <p><Clock /></p>
           </div>
           <div className='space-x-7 flex items-center mt-3'>
-            <div className='text-3xl'><span className='text-lg'>+</span>{percentage}%</div>
+            <div className='text-lg sm:text-3xl'><span className='text-lg'>+</span>{percentage}%</div>
             <span className='text-sm bg-green-500 px-2 py-1 rounded-md'>
               + {addRates} %
             </span>
@@ -88,8 +94,8 @@ const Homepage = () => {
         </motion.div>
 
         {/* Risk Block */}
-        <motion.div
-          className=' bg-gray-200 md:w-fit px-10 py-2 rounded-md shadow-md mt-10 md:mr-10'
+        <motion.div className=' bg-gray-200 md:w-fit px-5
+        sm:px-10 py-2 rounded-md shadow-md mt-10 '
           initial={{ scale: 0.9, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           transition={{ delay: 0.8 }}
@@ -99,7 +105,7 @@ const Homepage = () => {
             <p className='text-red-600'><ArrowDown01 /></p>
           </div>
           <div className='space-x-7 flex items-center mt-3'>
-            <div className='text-3xl'><span className='text-lg'>+</span>{addRates}%</div>
+            <div className='text-lg sm:text-3xl'><span className='text-lg'>+</span>{addRates}%</div>
             <span className='text-sm bg-red-600 px-2 py-1 rounded-md'>
               - {percentage} %
             </span>

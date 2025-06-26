@@ -1,8 +1,10 @@
+
 import React, { useState } from 'react';
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { Home, House } from 'lucide-react'
 
 // 🔐 Login page
 const Login = () => {
@@ -41,7 +43,9 @@ const Login = () => {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100 px-4">
+      
       <ToastContainer position="top-center" />
+      
       <form onSubmit={handleSubmit}
         className="bg-white p-6 rounded-xl shadow-md w-full max-w-md space-y-5">
         <h2 className="text-2xl font-bold text-center text-gray-800">Log In</h2>
@@ -73,7 +77,7 @@ const Login = () => {
           {loading ? 'Logging in...' : 'Login'}
         </button>
 
-        <div className="text-center flex justify-center gap-x-5 items-center">
+        <div className="text-center space-y-5 items-center">
           <Link to="/forgot-password" className="text-red-700 hover:underline ">
             Forgot password?
           </Link>
@@ -81,6 +85,9 @@ const Login = () => {
           <p className="text-sm text-gray-600">Don't have an account?</p>
           <Link to='/register' className="mt-1 text-blue-600 hover:underline">
           Register
+          </Link>
+          <Link to='/'>
+          <Home />
           </Link>
           </div>
         </div>
