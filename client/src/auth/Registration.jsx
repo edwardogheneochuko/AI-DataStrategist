@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
@@ -15,7 +16,7 @@ const Registration = () => {
     password: '',
     confirmPassword: ''
   });
-
+  
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
 

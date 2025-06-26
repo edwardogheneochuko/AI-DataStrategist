@@ -4,6 +4,7 @@ import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
+
 const Dashboard = () => {
   const [greeting, setGreeting] = useState('')
   const navigate = useNavigate()
@@ -21,7 +22,7 @@ const Dashboard = () => {
         }
       })
       .then(res => {
-        setGreeting(res.data.message)   // ✅ Save "Welcom, name"
+        setGreeting(res.data.message)   // ✅ Save "Welcome, name"
       })
       .catch(err => {
         toast.err('Session expired. Please login again')

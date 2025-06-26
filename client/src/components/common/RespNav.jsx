@@ -42,17 +42,7 @@ const RespNav = () => {
             className="w-full"
           >
             <ul className='text-center bg-gray-100 py-3 text-lg shadow-md flex flex-col'>
-              <Link
-                to='data'
-                spy={true}
-                smooth={true}
-                offset={50}
-                duration={500}
-                onClick={handleToggle}
-                className={styles}
-              >
-                Data
-              </Link>
+              
               <Link
                 to='platform'
                 spy={true}
