@@ -8,8 +8,6 @@ import "@fontsource/roboto"; // Defaults to weight 400
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <BrowserRouter>
        <App />
-    </BrowserRouter>
   </StrictMode>,
 )

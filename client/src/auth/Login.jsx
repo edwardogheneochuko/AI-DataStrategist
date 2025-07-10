@@ -8,7 +8,7 @@ import { Home, House } from 'lucide-react'
 
 // 🔐 Login page
 const Login = () => {
-  const inputStyles = 'w-full px-4 py-2 shadow-md focus:outline-none focus:ring-2 focus:ring-gray-500';
+  const inputStyles = 'w-full px-4 mt-3 rounded-lg  py-2 shadow-lg focus:outline-none focus:ring-2 focus:ring-gray-500';
 
   const [formData, setFormData] = useState({
     email: '',
@@ -47,21 +47,22 @@ const Login = () => {
       <ToastContainer position="top-center" />
       
       <form onSubmit={handleSubmit}
-        className="bg-white p-6 rounded-xl shadow-md w-full max-w-md space-y-5">
+        className="bg-white p-6 rounded-xl shadow-md w-full max-w-md space-y-9">
         <h2 className="text-2xl font-bold text-center text-gray-800">Log In</h2>
+        <label className='font-semibold text-lg text-gray-700'>Email</label>
         <input
           name="email"
           type="email"
-          placeholder="Email"
+          placeholder="your-email@gmail.com"
           className={inputStyles}
           onChange={handleChange}
           value={formData.email}
           required />
-          
+        <label className='font-semibold text-lg text-gray-700'>Password</label>
         <input
           name="password"
           type="password"
-          placeholder="Enter password"
+          placeholder="---------"
           className={inputStyles}
           onChange={handleChange}
           value={formData.password}
@@ -71,27 +72,27 @@ const Login = () => {
         <button
           type="submit"
           disabled={loading}
-          className={`w-full bg-gray-700 text-white p-2 rounded cursor-pointer
+          className={`w-full bg-gray-700 text-white py-3 rounded-full cursor-pointer
              hover:bg-green-700 transition duration-200 ${
             loading ? 'opacity-50 cursor-not-allowed' : '' }`}>
           {loading ? 'Logging in...' : 'Login'}
         </button>
 
-        <div className="text-center space-y-5 items-center">
-          <Link to="/forgot-password" className="text-red-700 hover:underline ">
+        <div className="text-center space-y-5 items-center text-sm font-medium">
+          <Link to="/forgot-password" 
+          className="text-red-700 hover:underline">
             Forgot password?
           </Link>
           <div>
-          <p className="text-sm text-gray-600">Don't have an account?</p>
-          <Link to='/register' className="mt-1 text-blue-600 hover:underline">
-          Register
-          </Link>
-          <Link to='/'>
-          <Home />
+          <div className='flex items-center justify-center gap-x-2'>
+          <p className="text-sm text-gray-600">I don't have an account?</p>
+          <Link to='/register' 
+          className=" text-blue-600  text-sm font-semibold">
+          Sign Up
           </Link>
           </div>
+          </div>
         </div>
-       
       </form>
     </div>
   );

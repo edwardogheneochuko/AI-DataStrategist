@@ -8,7 +8,6 @@ import Header from '../../shared/Header';
 
 // images
 import platform from '../../assets/platform.jpg';
-import Title from '../../shared/Title';
 import Card from '../../shared/Card';
 
 const Data = () => {
@@ -86,9 +85,7 @@ const Data = () => {
 
       <div className='mx-4 sm:w-3/4  sm:mx-auto my-10'>
         <div>
-          <Title title='About Adject' subTitle='Transform how you power your key business tasks' 
-           description='Deep insights build themselves, pulling fresh and accurate performance data,
-            into succinct summaries - no messy spreadsheets required.' />
+         open and close 
         </div>
        
       </div>
