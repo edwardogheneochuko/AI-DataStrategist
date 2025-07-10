@@ -5,6 +5,7 @@ import Navbar from '../components/common/Navbar'
 import homepage from '../assets/homepage.jpg'
 import Homepage from '../components/HomePage/Homepage'
 import Platform from '../components/HomePage/Platform'
+import Marketing from '../components/HomePage/Marketing'
 
 
 const Home = () => {
@@ -18,7 +19,7 @@ const Home = () => {
         <Homepage />
       </div>
       <Platform />
-      
+      <Marketing />
     </div>
   )
 }

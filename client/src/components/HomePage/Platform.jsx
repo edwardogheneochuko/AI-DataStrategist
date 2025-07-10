@@ -4,11 +4,9 @@ import React, { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
 
 // pages
-import Header from '../../shared/Header';
 
 // images
 import platform from '../../assets/platform.jpg';
-import Card from '../../shared/Card';
 
 const Data = () => {
   const ref = useRef(null);
@@ -36,7 +34,6 @@ const Data = () => {
   };
 
   return (
-    <div>
       <div id='platform' className='mt-10 text-2xl relative'>
         {/* Background Image with Opacity */}
         <div
@@ -82,14 +79,6 @@ const Data = () => {
           </motion.div>
         </div>
       </div>
-
-      <div className='mx-4 sm:w-3/4  sm:mx-auto my-10'>
-        <div>
-         open and close 
-        </div>
-       
-      </div>
-    </div>
   );
 };
 
