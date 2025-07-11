@@ -68,7 +68,7 @@ const Homepage = () => {
       </motion.div>
 
       <motion.div
-        className='flex justify-between mx-10 sm:mx-20 md:mx-32'
+        className='flex justify-between mx-10 sm:mx-20 md:mx-32 space-x-5'
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.4, duration: 0.6 }}
@@ -98,8 +98,7 @@ const Homepage = () => {
         sm:px-10 py-2 rounded-md shadow-md mt-10 '
           initial={{ scale: 0.9, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
-          transition={{ delay: 0.8 }}
-        >
+          transition={{ delay: 0.8 }}>
           <div className='flex justify-between text-gray-700'>
             <h1>Risk </h1>
             <p className='text-red-600'><ArrowDown01 /></p>
