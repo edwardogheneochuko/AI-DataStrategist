@@ -1,6 +1,6 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
-import {Rocket} from 'lucide-react'
+import { Rocket } from 'lucide-react'
 import RespNav from './RespNav'
 import { Link } from 'react-scroll'
 
@@ -25,7 +25,7 @@ p-2 md:px-3 bg-white rounded-2xl shadow-md md:z-50 top-4'>
        md:gap-x-5 lg:gap-x-7 text-xs  lg:text-base  text-gray-600'>
         <Link className={styles} to='platform' spy={true} smooth={true} offset={50} duration={500} > Platform </Link>
         <Link className={styles} to='marketing' spy={true} smooth={true} offset={50} duration={500} >Marketing</Link>
-        <Link className={styles} to='contacts' spy={true} smooth={true} offset={50} duration={500} >Contacts</Link>
+        <Link className={styles} to='contact' spy={true} smooth={true} offset={50} duration={500} >Contacts</Link>
       </ul>
       <button className='bg-gray-100 text-xs px-3 py-2 md:px-4 lg:px-5
       lg:text-lg rounded-md cursor-pointer hover:bg-red-300 duration-200
