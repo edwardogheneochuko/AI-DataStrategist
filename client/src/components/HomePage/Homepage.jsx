@@ -46,7 +46,7 @@ const Homepage = () => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.2, duration: 0.6 }}
       >
-        <h1 className=' font-semibold font-mono text-2xl md:text-3xl
+        <h1 className=' font-semibold font-mono text-3xl md:text-4xl
          text-ellipsis overflow-hidden lg:text-6xl text-neutral-900'>
           We evolve marketing ecosystems <br />
           <p className='mt-3'>for consumer brands</p>

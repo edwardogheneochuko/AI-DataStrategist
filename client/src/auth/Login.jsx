@@ -4,11 +4,11 @@ import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { Home, House } from 'lucide-react'
+import { Rocket } from 'lucide-react';
 
 // 🔐 Login page
 const Login = () => {
-  const inputStyles = 'w-full px-4 mt-3 rounded-lg  py-2 shadow-lg focus:outline-none focus:ring-2 focus:ring-gray-500';
+  const inputStyles = 'w-full px-4 py-2 mt-3  placeholder:text-sm rounded-lg border-gray-200 border focus:outline-none focus:ring-2 focus:ring-gray-500';
 
   const [formData, setFormData] = useState({
     email: '',
@@ -42,14 +42,19 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100 px-4">
+    <div className="min-h-screen flex items-center justify-center bg-white px-4">
       
       <ToastContainer position="top-center" />
       
       <form onSubmit={handleSubmit}
-        className="bg-white p-6 rounded-xl shadow-md w-full max-w-md space-y-9">
-        <h2 className="text-2xl font-bold text-center text-gray-800">Log In</h2>
-        <label className='font-semibold text-lg text-gray-700'>Email</label>
+        className="bg-white p-6 rounded-xl shadow-lg sm:shadow-lg w-full max-w-md space-y-9">
+        <div className="text-2xl sm:text-3xl font-bold text-center text-gray-800">
+          <Rocket className="inline-block mb-2 text-red-700 " size={35} />
+          <h1>Sign in to your <br /> account</h1>
+          <span className='text-xs  font-light'>Enter your email below 
+            to access your  account</span>
+        </div>
+        <label className=' text-sm text-neutral-900'>Email</label>
         <input
           name="email"
           type="email"
@@ -58,11 +63,17 @@ const Login = () => {
           onChange={handleChange}
           value={formData.email}
           required />
-        <label className='font-semibold text-lg text-gray-700'>Password</label>
+        <div className='flex items-center justify-between mt-2 mb-1'>
+        <label className=' text-sm text-neutral-900'>Password</label>
+        <Link to="/forgot-password" 
+          className=" text-xs text-green-700">
+            Forgot password?
+          </Link>
+        </div>
         <input
           name="password"
           type="password"
-          placeholder="---------"
+          placeholder="........"
           className={inputStyles}
           onChange={handleChange}
           value={formData.password}
@@ -72,27 +83,18 @@ const Login = () => {
         <button
           type="submit"
           disabled={loading}
-          className={`w-full bg-gray-700 text-white py-3 rounded-full cursor-pointer
-             hover:bg-green-700 transition duration-200 ${
+          className={`w-full bg-green-800 text-white py-2 sm:py-3 rounded-md cursor-pointer
+             hover:bg-green-900 transition duration-200 text-sm ${
             loading ? 'opacity-50 cursor-not-allowed' : '' }`}>
-          {loading ? 'Logging in...' : 'Login'}
+          {loading ? 'Sign in...' : 'Sign in'}
         </button>
-
-        <div className="text-center space-y-5 items-center text-sm font-medium">
-          <Link to="/forgot-password" 
-          className="text-red-700 hover:underline">
-            Forgot password?
-          </Link>
-          <div>
           <div className='flex items-center justify-center gap-x-2'>
           <p className="text-sm text-gray-600">I don't have an account?</p>
           <Link to='/register' 
-          className=" text-blue-600  text-sm font-semibold">
-          Sign Up
+          className="text-green-600 text-sm">
+            Register now
           </Link>
           </div>
-          </div>
-        </div>
       </form>
     </div>
   );
