@@ -16,7 +16,7 @@ const Home = () => {
       className="w-full bg-cover bg-center"
       style={{ backgroundImage: `url(${homepage})`, minHeight: '100vh' }}
     >
-      <div className="pt-2 md:pt-3"> {/* ✅ Added top padding here */}
+      <div className="pt-[1px]"> {/* ✅ Added top padding here */}
         <Navbar />
         <Homepage />
       </div> 

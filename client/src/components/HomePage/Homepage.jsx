@@ -35,7 +35,7 @@ const Homepage = () => {
 
   return (
     <motion.div id='home'
-      className='mt-20 px-1'
+      className='mt-30 md:mt-48 px-1'
       initial={{ opacity: 0, y: 50 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.8, ease: 'easeOut' }}
