@@ -58,7 +58,7 @@ const Login = () => {
         <span className='flex justify-between'>
         <label className='text-sm text-neutral-900'>Password</label>
         <Link to='/forgot-password' 
-        className='text-xs text-red-500 hover:underline'>forgot Password</Link>
+        className='text-xs text-green-500 hover:underline'>forgot Password</Link>
         </span>
         <input type="password" placeholder="........" className={inputStyles} {...register('password')} />
         {errors.password && <p className="text-red-500 text-xs">{errors.password.message}</p>}

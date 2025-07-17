@@ -45,7 +45,7 @@ const router = createBrowserRouter([
     ),
     children: [
       {
-        path: 'settings',   // resolves to /dashboard/settings
+        path: 'settings',  
         element: <Settings />,
       },
     ],
