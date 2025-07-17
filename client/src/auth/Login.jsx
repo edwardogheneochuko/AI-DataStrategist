@@ -1,39 +1,38 @@
-
 import React, { useState } from 'react';
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Rocket } from 'lucide-react';
+import { useForm } from 'react-hook-form';
+import { z } from 'zod';
+import { zodResolver } from '@hookform/resolvers/zod';
 
-// 🔐 Login page
+// Schema outside the component
+const loginSchema = z.object({
+  email: z.string().email('Invalid email address'),
+  password: z.string().min(6, 'Password must be at least 6 characters'),
+});
+
 const Login = () => {
-  const inputStyles = 'w-full px-4 py-2 mt-3  placeholder:text-sm rounded-lg border-gray-200 border focus:outline-none focus:ring-2 focus:ring-gray-500';
+  const inputStyles = 'w-full px-4 py-2 mt-3 placeholder:text-sm rounded-lg border-gray-200 border focus:outline-none focus:ring-2 focus:ring-gray-500';
 
-  const [formData, setFormData] = useState({
-    email: '',
-    password: ''
-  });
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
-  };
+  const { register, handleSubmit, formState: { errors } } = useForm({
+    resolver: zodResolver(loginSchema)
+  });
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setLoading(true); // start loading when form submits
-
+  const onSubmit = async (data) => {
+    setLoading(true);
     try {
-      const res = await axios.post('http://localhost:5000/login', formData);
-      localStorage.setItem('token', res.data.token); // save token
-
-      toast.success('Login successful! Redirecting...');
-      setTimeout(() => {
-        navigate('/dashboard');
-      }, 1500);
+      const res = await axios.post('http://localhost:5000/login', data);
+      localStorage.setItem('token', res.data.token);
+      toast.success('Login successful!', {
+        onClose: () => navigate('/dashboard'),
+        autoClose: 1500
+      });
     } catch (err) {
       toast.error(err.response?.data?.message || 'Login failed');
     } finally {
@@ -43,58 +42,37 @@ const Login = () => {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-white px-4">
-      
       <ToastContainer position="top-center" />
-      
-      <form onSubmit={handleSubmit}
-        className="bg-white p-6 rounded-xl shadow-lg sm:shadow-lg w-full max-w-md space-y-9">
+      <form onSubmit={handleSubmit(onSubmit)} className="bg-white p-6 rounded-xl shadow-lg w-full max-w-md space-y-9">
         <div className="text-2xl sm:text-3xl font-bold text-center text-gray-800">
-          <Rocket className="inline-block mb-2 text-red-700 " size={35} />
+          <Rocket className="inline-block mb-2 text-red-700" size={35} />
           <h1>Sign in to your <br /> account</h1>
-          <span className='text-xs  font-light'>Enter your email below 
-            to access your  account</span>
+          <span className='text-xs font-light'>Enter your email below to access your account</span>
         </div>
-        <label className=' text-sm text-neutral-900'>Email</label>
-        <input
-          name="email"
-          type="email"
-          placeholder="your-email@gmail.com"
-          className={inputStyles}
-          onChange={handleChange}
-          value={formData.email}
-          required />
-        <div className='flex items-center justify-between mt-2 mb-1'>
-        <label className=' text-sm text-neutral-900'>Password</label>
-        <Link to="/forgot-password" 
-          className=" text-xs text-green-700">
-            Forgot password?
-          </Link>
-        </div>
-        <input
-          name="password"
-          type="password"
-          placeholder="........"
-          className={inputStyles}
-          onChange={handleChange}
-          value={formData.password}
-          required
-        />
 
-        <button
-          type="submit"
-          disabled={loading}
-          className={`w-full bg-green-800 text-white py-2 sm:py-3 rounded-md cursor-pointer
-             hover:bg-green-900 transition duration-200 text-sm ${
-            loading ? 'opacity-50 cursor-not-allowed' : '' }`}>
-          {loading ? 'Sign in...' : 'Sign in'}
+        <label className='text-sm text-neutral-900'>Email</label>
+        <input type="email" placeholder="your-email@gmail.com" className={inputStyles} {...register('email')} />
+        {errors.email && <p className="text-red-500 text-xs ">{errors.email.message}</p>}
+
+        <div className=''>
+        <span className='flex justify-between'>
+        <label className='text-sm text-neutral-900'>Password</label>
+        <Link to='/forgot-password' 
+        className='text-xs text-red-500 hover:underline'>forgot Password</Link>
+        </span>
+        <input type="password" placeholder="........" className={inputStyles} {...register('password')} />
+        {errors.password && <p className="text-red-500 text-xs">{errors.password.message}</p>}
+        </div>
+
+
+        <button type="submit" disabled={loading} className={`w-full bg-green-800 text-white py-2 sm:py-3 rounded-md hover:bg-green-900 transition duration-200 text-sm ${loading ? 'opacity-50 cursor-not-allowed' : ''}`}>
+          {loading ? 'Signing in...' : 'Sign in'}
         </button>
-          <div className='flex items-center justify-center gap-x-2'>
+
+        <div className='flex items-center justify-center gap-x-2'>
           <p className="text-sm text-gray-600">I don't have an account?</p>
-          <Link to='/register' 
-          className="text-green-600 text-sm">
-            Register now
-          </Link>
-          </div>
+          <Link to="/register" className="text-green-600 text-sm">Register now</Link>
+        </div>
       </form>
     </div>
   );
