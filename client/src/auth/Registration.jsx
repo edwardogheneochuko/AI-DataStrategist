@@ -40,7 +40,7 @@ const Registration = () => {
     const { confirmPassword, ...formData } = data; // remove confirmPassword
 
     try {
-      const res = await axios.post('http://localhost:5000/register', formData);
+      const res = await axios.post('http://localhost:5000/api/user/register', formData);
       toast.success(res.data.message || 'Registration successful! Redirecting...');
       setTimeout(() => {
         navigate('/login');

@@ -16,7 +16,7 @@ const Dashboard = () => {
       toast.error('Unauthorized!...Please log in');
       navigate('/login');
     } else {
-      axios.get('http://localhost:5000/protected', {
+      axios.get('http://localhost:5000/api/user/protected', {
         headers: {
           Authorization: `Bearer ${token}`,
         },
