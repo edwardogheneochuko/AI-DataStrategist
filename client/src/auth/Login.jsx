@@ -27,7 +27,7 @@ const Login = () => {
   const onSubmit = async (data) => {
     setLoading(true);
     try {
-      const res = await axios.post('http://localhost:5000/login', data);
+      const res = await axios.post('http://localhost:5000/api/user/login', data);
       localStorage.setItem('token', res.data.token);
       toast.success('Login successful!', {
         onClose: () => navigate('/dashboard'),
