@@ -1,5 +1,5 @@
 // navItems.js
-import { ChartArea, HelpCircle, Home, Moon, PersonStandingIcon, Settings } from 'lucide-react';
+import { ChartArea, HelpCircle, Home,  PersonStandingIcon, Settings } from 'lucide-react';
 
 export const sidebarItems = [
   {
@@ -20,7 +20,7 @@ export const sidebarItems = [
   {
     label: 'Todo List',
     icon: Settings,
-    path: '/dashboard/todo',
+    path: '/dashboard/todolist',
     className: 'mb-5',
   },
 ];
@@ -60,5 +60,6 @@ export const socialMedia = [
 export const mobileOnlyItems = [
   ...sidebarItems,
   ...bottomSidebarItems,
+  ...socialMedia,
 ];
 

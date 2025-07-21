@@ -5,37 +5,35 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Sidebar from '../components/Dashboard/Sidebar';
 import ThemeToggleButton from '../context/ThemeToggleButton';
-// import ThemeToggleButton from '../context/ThemeToggleButton';
 
 const Dashboard = () => {
   const [greeting, setGreeting] = useState('');
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const token = localStorage.getItem('token');
-
-    if (!token) {
-      toast.error('Unauthorized!...Please log in');
-      navigate('/login');
-    } else {
-      axios
-        .get('http://localhost:5000/api/user/protected', {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        })
-        .then((res) => {
-          setGreeting(res.data.message);
-          setLoading(false);
-        })
-        .catch((err) => {
-          toast.error('Session expired. Please login again');
-          localStorage.removeItem('token');
-          navigate('/login');
-        });
-    }
-  }, [navigate]);
+  // useEffect(() => {
+  //   const token = localStorage.getItem('token');
+  //   if (!token) {
+  //     toast.error('Unauthorized!...Please log in');
+  //     navigate('/login');
+  //   } else {
+  //     axios
+  //       .get('http://localhost:5000/api/user/protected', {
+  //         headers: {
+  //           Authorization: `Bearer ${token}`,
+  //         },
+  //       })
+  //       .then((res) => {
+  //         setGreeting(res.data.message);
+  //         setLoading(false);
+  //       })
+  //       .catch((err) => {
+  //         toast.error('Session expired. Please login again');
+  //         localStorage.removeItem('token');
+  //         navigate('/login');
+  //       });
+  //   }
+  // }, [navigate]);
 
   const handleLogout = () => {
     localStorage.removeItem('token');
@@ -45,7 +43,8 @@ const Dashboard = () => {
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-neutral-900 transition-colors duration-300">
-      <header className="flex justify-between items-center mb-2 p-4 border-b dark:border-gray-700">
+      {/* Fixed header */}
+      <header className="fixed top-0 left-0 right-0 z-50 flex justify-between items-center mb-2 p-4 shadow-md dark:shadow-sky-900 bg-white dark:bg-neutral-800">
         <h1 className="text-base sm:text-lg font-semibold text-gray-800 dark:text-gray-100">
           {loading ? 'Loading...' : greeting}
         </h1>
@@ -55,8 +54,7 @@ const Dashboard = () => {
             onClick={handleLogout}
             title="Log out"
             aria-label="Log out"
-            className="flex items-center gap-2 bg-red-500 dark:bg-red-800 text-white text-sm cursor-pointer
-             px-4 py-2 rounded hover:bg-red-700 transition"
+            className="flex items-center gap-2 bg-red-500 dark:bg-red-800 text-white text-sm cursor-pointer px-4 py-2 rounded hover:bg-red-700 transition"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -77,9 +75,9 @@ const Dashboard = () => {
         </div>
       </header>
 
-      <main className="flex gap-4 px-4 md:px-0">
+      <main className="flex pt-16 min-h-screen relative">
         <Sidebar />
-        <div className="flex-1">
+        <div className="flex-1 md:ml-72 px-4 py-6">
           <Outlet />
         </div>
       </main>
