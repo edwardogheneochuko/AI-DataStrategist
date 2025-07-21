@@ -7,7 +7,7 @@ import Home from './pages/Home';
 import Login from './auth/Login';
 import Registration from './auth/Registration';
 import ForgotPassword from './auth/ForgotPassword';
-import ProtectedRoute from './shared/ProtectedRoute';
+import ProtectedRoute from './shared/ProtectedRoute'; 
 import Error from './auth/Error';
 
 // main pages
@@ -24,7 +24,7 @@ const router = createBrowserRouter([
       { index: true, element: <Home /> },
     ],
   },
-  {
+  { 
     path: '/login',
     element: <Login />,
   },
@@ -59,4 +59,4 @@ export default function App() {
       <RouterProvider router={router} />
     </>
   );
-}
+} 

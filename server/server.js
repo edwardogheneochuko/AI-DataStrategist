@@ -13,8 +13,8 @@ app.use(cors());
 app.use(express.json());
 
 
-app.use(cors({
-  origin: '*',
+app.use(cors({ 
+  origin: '*', 
   credentials: 'true',
   allowHeaders: ['Content-Type', 'Authorization']
 }))
