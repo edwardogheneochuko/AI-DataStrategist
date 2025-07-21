@@ -14,6 +14,7 @@ import Error from './auth/Error';
 import Dashboard from './pages/Dashboard';
 import Settings from './pages/Settings';
 import Layout from './components/HomePage/Layout';
+import Todolist from './pages/Todolist';
 
 const router = createBrowserRouter([
   {
@@ -39,15 +40,20 @@ const router = createBrowserRouter([
   {
     path: '/dashboard',
     element: (
-      <ProtectedRoute>
-        <Dashboard />
-      </ProtectedRoute>
+      // <ProtectedRoute>
+      //   <Dashboard />
+      // </ProtectedRoute>
+      <Dashboard />
     ),
     children: [
       {
         path: 'settings',  
         element: <Settings />,
       },
+      {
+        path: 'todolist',
+        element: <Todolist />
+      }
     ],
   },
 ]);

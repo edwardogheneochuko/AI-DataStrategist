@@ -16,7 +16,9 @@
     "aos": "^2.3.4",
     "axios": "^1.9.0",
     "framer-motion": "^12.16.0",
+    "immer": "^10.1.1",
     "lucide-react": "^0.513.0",
+    "persist": "^0.2.7",
     "react": "^19.0.0",
     "react-anchor-link-smooth-scroll": "^1.0.12",
     "react-dom": "^19.0.0",
@@ -26,7 +28,8 @@
     "react-scroll": "^1.9.3",
     "react-toastify": "^11.0.5",
     "tailwindcss": "^4.1.8",
-    "zod": "^4.0.5"
+    "zod": "^4.0.5",
+    "zustand": "^5.0.6"
   },
   "devDependencies": {
     "@eslint/js": "^9.21.0",

@@ -4,7 +4,9 @@ import React from 'react'
 
 const Settings = () => {
   return (
-    <div>Settings</div>
+    <div className='dark:text-white'>
+      Settings
+    </div>
   )
 }
 
