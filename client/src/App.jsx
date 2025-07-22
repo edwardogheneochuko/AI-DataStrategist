@@ -15,6 +15,10 @@ import Dashboard from './pages/Dashboard';
 import Settings from './pages/Settings';
 import Layout from './components/HomePage/Layout';
 import Todolist from './pages/Todolist';
+import Main from './pages/Main';
+import Profile from './pages/Profile';
+import Trading from './pages/Trading';
+import Help from './pages/Help';
 
 const router = createBrowserRouter([
   {
@@ -47,12 +51,28 @@ const router = createBrowserRouter([
     ),
     children: [
       {
+        path: '/dashboard',
+        element: <Main />
+      },
+      {
+        path: 'profile',
+        element: <Profile />
+      },
+      {
+        path: 'trading',
+        element: <Trading />
+      },
+      {
         path: 'settings',  
         element: <Settings />,
       },
       {
         path: 'todolist',
         element: <Todolist />
+      },
+      {
+        path: 'help',
+        element: <Help />
       }
     ],
   },

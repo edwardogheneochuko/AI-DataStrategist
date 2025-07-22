@@ -11,7 +11,6 @@ const Sidebar = () => {
   const location = useLocation();
   const [isMobileOpen, setIsMobileOpen] = useState(false);
 
-  // Only highlights exact path
   const isActive = (currentPath, targetPath) => currentPath === targetPath;
 
   const navStyles = (active) =>
@@ -21,6 +20,18 @@ const Sidebar = () => {
   const respStyles = (active) =>
     `flex flex-col text-xs items-center gap-1 px-3 py-2 rounded-md font-medium transition-colors w-full
      ${active ? 'bg-gray-200 text-black' : 'text-gray-700 hover:bg-gray-100 dark:text-white dark:hover:text-black'}`;
+
+  // Deduplicate socialMedia from mobileOnlyItems
+  const mobileNavItems = [
+    ...mobileOnlyItems,
+    ...socialMedia
+      .filter((item) => !mobileOnlyItems.some(m => m.label === item.label))
+      .map(({ label, icon, link }) => ({
+        label,
+        icon,
+        path: link,
+      })),
+  ];
 
   return (
     <main>
@@ -62,8 +73,8 @@ const Sidebar = () => {
                 <a
                   href={link}
                   target="_blank"
-                  className={`${navStyles(false)} mb-3`}
                   rel="noopener noreferrer"
+                  className={`${navStyles(false)} mb-3`}
                   title={label}
                 >
                   <img src={icon} alt={label} className="w-5 h-5" />
@@ -85,12 +96,10 @@ const Sidebar = () => {
         aria-controls="mobile-sidebar"
       >
         {isMobileOpen ? (
-          // Close Icon
           <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6 text-gray-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
           </svg>
         ) : (
-          // Menu Icon
           <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6 text-gray-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 8h16M4 16h16" />
           </svg>
@@ -103,31 +112,25 @@ const Sidebar = () => {
         role="dialog"
         aria-hidden={!isMobileOpen}
         className={`fixed bottom-0 left-0 right-0 z-40 bg-white dark:bg-neutral-900 
-          md:hidden rounded-t-3xl shadow-2xl p-4 transition-transform duration-300 ease-in-out
+          md:hidden rounded-t-3xl shadow-xl p-4 dark:shadow-sky-500
+          transition-transform duration-300 ease-in-out
           ${isMobileOpen ? 'translate-y-0' : 'translate-y-full'}`}
       >
         <nav className="grid grid-cols-3 gap-3 items-center overflow-x-auto" aria-label="Mobile bottom menu">
-          {[...mobileOnlyItems, ...socialMedia.map(({ label, icon, link }) => ({
-            label,
-            icon,
-            path: link,
-            isExternal: true,
-          }))].map(({ label, icon, path, isExternal }) => {
-            const Icon = typeof icon === 'string' || icon?.startsWith?.('http') ? null : icon;
-            const isImg = typeof icon === 'string' || icon?.startsWith?.('http');
+          {mobileNavItems.map(({ label, icon: Icon, path }) => {
             const active = isActive(location.pathname, path);
+            const isImg = typeof Icon === 'string';
 
-            return isExternal ? (
+            return isImg ? (
               <a
                 key={label}
                 href={path}
                 target="_blank"
                 rel="noopener noreferrer"
                 className={respStyles(false)}
-                title={label}
                 onClick={() => setIsMobileOpen(false)}
               >
-                {isImg ? <img src={icon} alt={label} className="w-5 h-5" /> : Icon && <Icon size={20} />}
+                <img src={Icon} alt={label} className="w-5 h-5" />
                 <p>{label}</p>
               </a>
             ) : (

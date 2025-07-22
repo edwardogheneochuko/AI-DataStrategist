@@ -2,12 +2,12 @@
 
 import React from 'react'
 
-const Settings = () => {
+const Main = () => {
   return (
     <div>
-      Settings
+        Main
     </div>
   )
 }
 
-export default Settings
+export default Main
