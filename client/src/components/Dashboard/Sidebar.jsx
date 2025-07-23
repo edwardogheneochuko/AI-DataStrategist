@@ -7,6 +7,7 @@ import {
   socialMedia,
 } from '../constants/data';
 
+
 const Sidebar = () => {
   const location = useLocation();
   const [isMobileOpen, setIsMobileOpen] = useState(false);
@@ -15,11 +16,11 @@ const Sidebar = () => {
 
   const navStyles = (active) =>
     `flex items-center gap-2 px-4 py-2 rounded-md font-medium transition-colors w-full
-     ${active ? 'bg-gray-200 text-black' : 'text-gray-700 hover:bg-gray-100 dark:text-white dark:hover:text-black'}`;
+     ${active ? 'bg-green-200 text-black' : 'text-gray-700 hover:bg-gray-100 dark:text-white dark:hover:text-black'}`;
 
   const respStyles = (active) =>
     `flex flex-col text-xs items-center gap-1 px-3 py-2 rounded-md font-medium transition-colors w-full
-     ${active ? 'bg-gray-200 text-black' : 'text-gray-700 hover:bg-gray-100 dark:text-white dark:hover:text-black'}`;
+     ${active ? 'bg-green-200 text-black' : 'text-gray-700 hover:bg-gray-100 dark:text-white dark:hover:text-black'}`;
 
   // Deduplicate socialMedia from mobileOnlyItems
   const mobileNavItems = [
@@ -52,6 +53,8 @@ const Sidebar = () => {
               );
             })}
           </ul>
+
+          
 
           <ul className="border-t py-6 space-y-6">
             {bottomSidebarItems.map(({ label, icon: Icon, path }) => {

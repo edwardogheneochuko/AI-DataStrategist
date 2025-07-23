@@ -77,7 +77,7 @@ const Dashboard = () => {
 
       <main className="flex pt-16 min-h-screen relative">
         <Sidebar />
-        <div className="flex-1 md:ml-72 px-4 py-6">
+        <div className="flex-1 md:ml-64 px-3 sm:px-10 py-6">
           <Outlet />
         </div>
       </main>
