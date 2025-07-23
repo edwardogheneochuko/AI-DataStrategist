@@ -68,7 +68,7 @@ const Todolist = () => {
         <button
           onClick={handleAdd}
           disabled={!topic.trim() || !description.trim()}
-          className={`bg-green-600 text-white py-2 cursor-pointer
+          className={`bg-rose-600 text-white py-2 cursor-pointer
             rounded transition duration-200 ${
             !topic.trim() || !description.trim()
               ? 'opacity-50 cursor-not-allowed'

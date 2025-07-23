@@ -57,9 +57,20 @@ export const socialMedia = [
     },
 ]
 
+export const charts = [
+  { day: 'Mon', earnings: 50 },
+  { day: 'Tue', earnings: 250 },
+  { day: 'Wed', earnings: 200 },
+  { day: 'Thu', earnings: 300 },
+  { day: 'Fri', earnings: 400 },
+  { day: 'Sat', earnings: 150 },
+  { day: 'Sun', earnings: 500 },
+]
+
 export const mobileOnlyItems = [
   ...sidebarItems,
   ...bottomSidebarItems,
   ...socialMedia,
 ];
+
 
