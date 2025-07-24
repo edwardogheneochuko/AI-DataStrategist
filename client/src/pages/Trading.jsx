@@ -1,10 +1,13 @@
 
 
 import React from 'react'
+import Stats from '../components/Trading/Stats'
 
 const Trading = () => {
   return (
-    <div>Trading</div>
+    <div className='min-h-screen flex flex-col'>
+      <Stats />
+    </div>
   )
 }
 

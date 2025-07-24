@@ -5,35 +5,36 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Sidebar from '../components/Dashboard/Sidebar';
 import ThemeToggleButton from '../context/ThemeToggleButton';
+import Bottom from '../components/common/Bottom';
 
 const Dashboard = () => {
   const [greeting, setGreeting] = useState('');
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
-  // useEffect(() => {
-  //   const token = localStorage.getItem('token');
-  //   if (!token) {
-  //     toast.error('Unauthorized!...Please log in');
-  //     navigate('/login');
-  //   } else {
-  //     axios
-  //       .get('http://localhost:5000/api/user/protected', {
-  //         headers: {
-  //           Authorization: `Bearer ${token}`,
-  //         },
-  //       })
-  //       .then((res) => {
-  //         setGreeting(res.data.message);
-  //         setLoading(false);
-  //       })
-  //       .catch((err) => {
-  //         toast.error('Session expired. Please login again');
-  //         localStorage.removeItem('token');
-  //         navigate('/login');
-  //       });
-  //   }
-  // }, [navigate]);
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      toast.error('Unauthorized!...Please log in');
+      navigate('/login');
+    } else {
+      axios
+        .get('http://localhost:5000/api/user/protected', {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        .then((res) => {
+          setGreeting(res.data.message);
+          setLoading(false);
+        })
+        .catch((err) => {
+          toast.error('Session expired. Please login again');
+          localStorage.removeItem('token');
+          navigate('/login');
+        });
+    }
+  }, [navigate]);
 
   const handleLogout = () => {
     localStorage.removeItem('token');
@@ -79,6 +80,7 @@ const Dashboard = () => {
         <Sidebar />
         <div className="flex-1 md:ml-64 px-3 sm:px-10 py-6">
           <Outlet />
+          <Bottom />
         </div>
       </main>
     </div>

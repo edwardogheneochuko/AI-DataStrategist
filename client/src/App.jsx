@@ -44,10 +44,9 @@ const router = createBrowserRouter([
   {
     path: '/dashboard',
     element: (
-      // <ProtectedRoute>
-      //   <Dashboard />
-      // </ProtectedRoute>
-      <Dashboard />
+      <ProtectedRoute>
+        <Dashboard />
+      </ProtectedRoute>
     ),
     children: [
       {
