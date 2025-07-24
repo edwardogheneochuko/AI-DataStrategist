@@ -12,10 +12,10 @@ const Earnings = () => {
         <h1 className='text-lg font-semibold hidden sm:flex'>Earnings</h1>
         <div className='grid grid-cols-1 sm:grid-cols-2 my-3 gap-3'>
           <div className='flex justify-between items-center border rounded-full px-7 py-5 tracking-wider bg-white dark:bg-black'>
-            <h1 className='text-sm'>
+            <h1 className='text-xs lg:text-sm'>
               Epoch 9 <br /> Earnings:
             </h1>
-            <h2 className='font-bold text-2xl md:text-3xl lg:text-4xl'>
+            <h2 className='font-bold text-2xl  lg:text-4xl'>
               {totalEarnings}
             </h2>
           </div>
